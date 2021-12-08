@@ -1,0 +1,10 @@
+.photo__container {
+    margin: 0 auto;
+    max-width: 242px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
