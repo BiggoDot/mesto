@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./pages/index.css">
-
     <title>Mesto</title>
 </head>
 
@@ -16,6 +15,17 @@
         <img src="./images/logo.svg" class="header__logo" alt="Место">
     </header>
     <main class="main">
+
+        <div class="popup">
+            <img src="./images/close.svg" alt="Закрыть" class="popup__close">
+            <div class="form">
+                <h2 class="form__title">Редактировать профиль</h2>
+                <input type="text" class="form__name" placeholder="" value="name">
+                <input type="text" class="form__extra" value="description">
+                <button class="form__save form__save_add">Сохранить</button>
+
+            </div>
+        </div>
         <section class="profile">
             <!-- PART WITH INFO -->
             <div class="profile__container">
