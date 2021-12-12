@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -10,81 +11,86 @@
 </head>
 
 <body class="page">
+
+
     <!-- HEADER -->
     <header class="header">
         <img src="./images/logo.svg" class="header__logo" alt="Место">
     </header>
     <main class="main">
-
-        <div class="popup">
-            <img src="./images/close.svg" alt="Закрыть" class="popup__close">
+        <!-- POPUP -->
+        <section class="popup">
+            <button type="button" class="popup__close"></button>
             <div class="form">
                 <h2 class="form__title">Редактировать профиль</h2>
-                <input type="text" class="form__name" placeholder="" value="name">
-                <input type="text" class="form__extra" value="description">
-                <button class="form__save form__save_add">Сохранить</button>
-
+                <form class="form__input">
+                    <input type="text" value="Жак-Ив Кусто" placeholder="Имя" maxlength="20" class="form__name">
+                    <input type="text" value="Исследователь океана" placeholder="Описание" maxlength="60"
+                        class="form__extra">
+                    <button type="submit" class="form__save form__save_add">Сохранить</button>
+                </form>
             </div>
-        </div>
+        </section>
+
+        <!-- PROFILE -->
         <section class="profile">
             <!-- PART WITH INFO -->
             <div class="profile__container">
                 <img src="./images/avatar.jpeg" alt="аватар" class="profile__avatar">
-                <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <p class="profile__description">Исследователь океана</p>
-                </div>
-                <div class="profile__change">
-                    <img src="./images/pen.svg" alt="Редактор" class="profile__edit">
+                <div class="profile__info-edit">
+                    <div class="profile__info">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <p class="profile__description">Исследователь океана</p>
+                    </div>
+                    <div class="profile__change">
+                        <button class="profile__edit" type="button"></button>
+                    </div>
                 </div>
             </div>
             <!-- ADD PHOTO -->
-            <div class="profile__button">
-                <img src="./images/plus.svg" alt="+" class="profile__add">
-            </div>
-            </div>
+            <button class="profile__button"></button>
         </section>
+
         <!-- PICTURES -->
         <section class="photo">
             <ul class="photo__grid">
                 <li class="photo__item"><img src="./images/castel.jpeg" alt="Замок" class="photo__mesto">
                     <div class="photo__container">
                         <p class="photo__description">Домбай</p>
-                    <img src="./images/like.svg" alt="Лайк" class="photo__like photo__like_active photo__like_disabled">
-                </div>
+                        <button class="photo__like"></button>
+                    </div>
                 </li>
                 <li class="photo__item"><img src="./images/mountain.jpeg" alt="Гора" class="photo__mesto">
                     <div class="photo__container">
-                    <p class="photo__description">Карачаевск</p>
-                    <img src="./images/like.svg" alt="Лайк" class="photo__like photo__like_active photo__like_disabled">
-                </div>
-                </li>
-                <li class="photo__item"><img src="./images/sunset.jpeg" alt="Закат" class="photo__mesto">
-                    <div class="photo__container">
-                    <p class="photo__description">Гора Эльбрус</p>
-                    <img src="./images/like.svg" alt="Лайк" class="photo__like photo__like_active photo__like_disabled">
+                        <p class="photo__description">Карачаевск</p>
+                        <button class="photo__like"></button>
                     </div>
                 </li>
                 <li class="photo__item"><img src="./images/sunset.jpeg" alt="Закат" class="photo__mesto">
                     <div class="photo__container">
-                    <p class="photo__description">Домбай</p>
-                    <img src="./images/like.svg" alt="Лайк" class="photo__like photo__like_active photo__like_disabled">
+                        <p class="photo__description">Гора Эльбрус</p>
+                        <button class="photo__like"></button>
+                    </div>
+                </li>
+                <li class="photo__item"><img src="./images/sunset.jpeg" alt="Закат" class="photo__mesto">
+                    <div class="photo__container">
+                        <p class="photo__description">Домбай</p>
+                        <button class="photo__like"></button>
                     </div>
                 </li>
                 <li class="photo__item"><img src="./images/castel.jpeg" alt="Замок" class="photo__mesto">
                     <div class="photo__container">
-                    <p class="photo__description">Гора Эльбрус</p>
-                    <img src="./images/like.svg" alt="Лайк" class="photo__like photo__like_active photo__like_disabled">
+                        <p class="photo__description">Гора Эльбрус</p>
+                        <button class="photo__like"></button>
                     </div>
                 </li>
                 <li class="photo__item"><img src="./images/mountain.jpeg" alt="Гора" class="photo__mesto">
                     <div class="photo__container">
-                    <p class="photo__description">Карачаево-Черкесия</p>
-                    <img src="./images/like.svg" alt="Лайк" class="photo__like photo__like_active photo__like_disabled">
+                        <p class="photo__description">Карачаево-Черкесия</p>
+                        <button class="photo__like"></button>
                     </div>
                 </li>
             </ul>
-
         </section>
     </main>
     <!-- FOOTER -->
@@ -92,6 +98,7 @@
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
 
+    <script src="./script/script.js"></script>
 </body>
 
 </html>

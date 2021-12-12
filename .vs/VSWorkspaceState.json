@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\block",
+    "\\block\\profile",
+    "\\block\\profile\\__container",
+    "\\block\\profile\\__description",
+    "\\block\\profile\\__edit",
+    "\\block\\profile\\__info",
+    "\\block\\profile\\__info-edit",
+    "\\block\\profile\\__name",
+    "\\script"
+  ],
+  "SelectedNode": "\\script\\script.js",
+  "PreviewInSolutionExplorer": false
+}

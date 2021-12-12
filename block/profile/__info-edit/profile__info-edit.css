@@ -1,11 +1,11 @@
-.profile__info {
+.profile__info-edit {
   display: flex;
-  flex-direction: column;
 }
 
 @media screen and (max-width:585px) {
-  .profile__info {
+  .profile__info-edit {
     justify-content: center;
-    text-align: center;
+    margin-top: 22px;
+    margin-bottom: 36px;
   }
 }
