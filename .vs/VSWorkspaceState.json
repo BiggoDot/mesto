@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\block",
-    "\\block\\profile",
-    "\\block\\profile\\__container",
-    "\\block\\profile\\__description",
+    "\\block\\form",
+    "\\block\\form\\__name",
     "\\block\\profile\\__edit",
     "\\block\\profile\\__info",
     "\\block\\profile\\__info-edit",
     "\\block\\profile\\__name",
+    "\\pages",
     "\\script"
   ],
-  "SelectedNode": "\\script\\script.js",
+  "SelectedNode": "\\block\\form\\__name\\form__name.css",
   "PreviewInSolutionExplorer": false
 }

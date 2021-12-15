@@ -12,11 +12,22 @@
   border-top: 0px;
   border-left: 0px;
   border-right: 0px;
+  padding: 0;
   padding-bottom: 13px;
+}
+
+.form__name:last-of-type {
+  margin-bottom: 48px;
 }
 
 @media screen and (max-width: 585px) {
   .form__name {
     max-width: 238px;
+  }
+}
+
+@media screen and (max-width: 585px) {
+  .form__name:last-of-type {
+    margin-bottom: 45px;
   }
 }
