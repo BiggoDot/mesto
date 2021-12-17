@@ -1,9 +1,9 @@
 .big-container__close {
-  position: relative;
+  position: absolute;
   width: 32px;
   height: 32px;
-  left: 236px;
-  bottom: 40px;
+  left: 436px;
+  bottom: 341px;
   background-color: rgba(0, 0, 0, 0);
   background-image: url(../../../images/close.svg);
   background-position: center;

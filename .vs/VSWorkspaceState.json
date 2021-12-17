@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\block",
-    "\\block\\header",
-    "\\block\\header\\__logo",
-    "\\block\\photo",
-    "\\block\\photo\\__container",
-    "\\block\\photo\\__item",
-    "\\block\\profile",
-    "\\block\\profile\\__container",
+    "\\block\\big-container\\__close",
+    "\\block\\big-container\\__title",
+    "\\block\\form",
+    "\\block\\form\\__input",
+    "\\block\\form\\__save",
+    "\\block\\popup\\_opened",
+    "\\block\\profile\\__name",
     "\\block\\profile\\__photo-button"
   ],
-  "SelectedNode": "\\script\\script.js",
+  "SelectedNode": "\\block\\form\\__input\\form__input.css",
   "PreviewInSolutionExplorer": false
 }
