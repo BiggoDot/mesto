@@ -10,6 +10,8 @@
   background-color: black;
   cursor: pointer;
   border: 1px solid #FFFFFF;
+  margin-left: 18px;
+  margin-top: 37px;
 }
 
 .profile__edit:hover {
@@ -22,5 +24,7 @@
     width: 18px;
     height: 18px;
     background-size: 7.5px 7.5px;
+    margin-left: 10px;
+    margin-top: 8px;
   }
 }

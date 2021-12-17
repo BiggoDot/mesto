@@ -1,9 +1,9 @@
-.popup__close {
+.big-container__close {
   position: relative;
   width: 32px;
   height: 32px;
-  left: 239px;
-  bottom: 192px;
+  left: 236px;
+  bottom: 40px;
   background-color: rgba(0, 0, 0, 0);
   background-image: url(../../../images/close.svg);
   background-position: center;
@@ -13,14 +13,14 @@
   cursor: pointer;
 }
 
-.popup__close:hover {
+.big-container__close:hover {
   opacity: 0.6;
 }
 
 @media screen and (max-width: 585px) {
-  .popup__close {
-    left: 125px;
-    bottom: 194px;
+  .big-container__close {
+    left: 130px;
+    bottom: 37px;
     width: 20px;
     height: 20px;
   }

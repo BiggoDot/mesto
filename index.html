@@ -18,19 +18,6 @@
     <img src="./images/logo.svg" class="header__logo" alt="Место">
   </header>
   <main class="main">
-    <!-- POPUP -->
-    <section class="popup">
-      <button type="button" class="popup__close"></button>
-      <div class="form">
-        <h2 class="form__title">Редактировать профиль</h2>
-        <form class="form__input">
-          <input type="text" value="" placeholder="Имя" maxlength="20" class="form__name" id="name" name="name">
-          <input type="text" value="" placeholder="Описание" maxlength="60"
-                 class="form__name" id="description" name="description">
-          <button type="submit" class="form__save">Сохранить</button>
-        </form>
-      </div>
-    </section>
 
     <!-- PROFILE -->
     <section class="profile">
@@ -42,13 +29,11 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__description">Исследователь океана</p>
           </div>
-          <div class="profile__change">
-            <button class="profile__edit" type="button"></button>
-          </div>
+            <button class="profile__edit" aria-label="редактировать" type="button"></button>
         </div>
       </div>
       <!-- ADD PHOTO -->
-      <button class="profile__button"></button>
+      <button aria-label="Добавить фото" type="button" class="profile__photo-button"></button>
     </section>
 
     <!-- PICTURES -->
@@ -57,43 +42,43 @@
         <li class="photo__item">
           <img src="./images/castel.jpeg" alt="Замок" class="photo__mesto">
           <div class="photo__container">
-            <p class="photo__description">Домбай</p>
-            <button class="photo__like"></button>
+            <h2 class="photo__description">Домбай</h2>
+            <button type="button" class="photo__like"></button>
           </div>
         </li>
         <li class="photo__item">
           <img src="./images/mountain.jpeg" alt="Гора" class="photo__mesto">
           <div class="photo__container">
-            <p class="photo__description">Карачаевск</p>
-            <button class="photo__like"></button>
+            <h2 class="photo__description">Карачаевск</h2>
+            <button type="button" class="photo__like"></button>
           </div>
         </li>
         <li class="photo__item">
           <img src="./images/sunset.jpeg" alt="Закат" class="photo__mesto">
           <div class="photo__container">
-            <p class="photo__description">Гора Эльбрус</p>
-            <button class="photo__like"></button>
+            <h2 class="photo__description">Гора Эльбрус</h2>
+            <button type="button" class="photo__like"></button>
           </div>
         </li>
         <li class="photo__item">
           <img src="./images/sunset.jpeg" alt="Закат" class="photo__mesto">
           <div class="photo__container">
-            <p class="photo__description">Домбай</p>
-            <button class="photo__like"></button>
+            <h2 class="photo__description">Домбай</h2>
+            <button type="button" class="photo__like"></button>
           </div>
         </li>
         <li class="photo__item">
           <img src="./images/castel.jpeg" alt="Замок" class="photo__mesto">
           <div class="photo__container">
-            <p class="photo__description">Гора Эльбрус</p>
-            <button class="photo__like"></button>
+            <h2 class="photo__description">Гора Эльбрус</h2>
+            <button type="button" class="photo__like"></button>
           </div>
         </li>
         <li class="photo__item">
           <img src="./images/mountain.jpeg" alt="Гора" class="photo__mesto">
           <div class="photo__container">
-            <p class="photo__description">Карачаево-Черкесия</p>
-            <button class="photo__like"></button>
+            <h2 class="photo__description">Карачаево-Черкесия</h2>
+            <button type="button" class="photo__like"></button>
           </div>
         </li>
       </ul>
@@ -103,6 +88,19 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
+  <!-- POPUP -->
+  <div class="popup">
+    <div class="big-container">
+      <button type="button" class="big-container__close"></button>
+      <h2 class="big-container__title">Редактировать профиль</h2>
+      <form class="form">
+        <input type="text" placeholder="Имя" maxlength="20" class="form__input" id="name" name="name">
+        <input type="text" placeholder="Описание" maxlength="60"
+               class="form__input" id="description" name="description">
+        <button type="submit" class="form__save">Сохранить</button>
+      </form>
+    </div>
+  </div>
 
   <script src="./script/script.js"></script>
 </body>
