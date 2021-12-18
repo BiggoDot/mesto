@@ -14,9 +14,9 @@
   margin-top: 37px;
 }
 
-.profile__edit:hover {
-  opacity: 0.6;
-}
+  .profile__edit:hover {
+    opacity: 0.6;
+  }
 
 
 @media screen and (max-width:585px) {
@@ -30,7 +30,7 @@
 }
 
 @media screen and (max-width: 585px) {
-    .profile__edit {
-        margin-top: 10px;
-    }
+  .profile__edit {
+    margin-top: 10px;
+  }
 }

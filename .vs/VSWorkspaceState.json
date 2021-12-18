@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\block",
-    "\\block\\photo",
-    "\\block\\popup",
-    "\\block\\popup\\_opened",
+    "\\block\\profile",
+    "\\block\\profile\\__container",
     "\\block\\profile\\__description",
     "\\block\\profile\\__edit",
     "\\block\\profile\\__info",
@@ -12,6 +11,6 @@
     "\\block\\profile\\__name",
     "\\block\\profile\\__photo-button"
   ],
-  "SelectedNode": "\\block\\photo\\photo.css",
+  "SelectedNode": "\\block\\profile\\profile.css",
   "PreviewInSolutionExplorer": false
 }

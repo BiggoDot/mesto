@@ -1,4 +1,4 @@
-.form__save {
+.popup__save {
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -16,12 +16,12 @@
   border: 0;
 }
 
-.form__save:hover {
+.popup__save:hover {
   opacity: 0.8;
 }
 
 @media screen and (max-width: 585px) {
-  .form__save {
+  .popup__save {
     max-width: 238px;
     height: 46px;
     font-size: 14px;

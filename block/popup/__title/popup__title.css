@@ -1,4 +1,4 @@
-.big-container__title {
+.popup__title {
   margin: 0;
   font-style: normal;
   font-weight: 900;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 585px) {
-  .big-container__title {
+  .popup__title {
     max-width: 238px;
     font-size: 18px;
     line-height: 22px;
