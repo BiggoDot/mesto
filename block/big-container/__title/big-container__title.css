@@ -1,6 +1,4 @@
 .big-container__title {
-  /*max-width: 358px;
-  width: 100%;*/
   margin: 0;
   font-style: normal;
   font-weight: 900;
@@ -16,5 +14,7 @@
     max-width: 238px;
     font-size: 18px;
     line-height: 22px;
+    margin-top: 25px;
+    margin-bottom: 75px;
   }
 }
