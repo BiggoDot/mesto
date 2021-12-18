@@ -28,3 +28,9 @@
     margin-top: 8px;
   }
 }
+
+@media screen and (max-width: 585px) {
+    .profile__edit {
+        margin-top: 10px;
+    }
+}

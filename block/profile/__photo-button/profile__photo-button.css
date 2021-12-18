@@ -20,5 +20,6 @@
 @media screen and (max-width: 585px) {
   .profile__photo-button {
     width: 282px;
+    background-size: 16px 16px;
   }
 }
