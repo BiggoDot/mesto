@@ -5,7 +5,6 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  height: 27px;
   color: #000000;
   margin-bottom: 30px;
   box-sizing: border-box;
@@ -14,7 +13,7 @@
   border-left: 0px;
   border-right: 0px;
   padding: 0;
-  padding-bottom: 13px;
+  padding-bottom: 9px;
 }
 
 .form__input:last-of-type {
