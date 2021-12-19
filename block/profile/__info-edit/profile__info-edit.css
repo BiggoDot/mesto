@@ -2,7 +2,7 @@
   display: flex;
 }
 
-@media screen and (max-width:585px) {
+@media screen and (max-width: 600px) {
   .profile__info-edit {
     justify-content: center;
     margin-top: 23px;
