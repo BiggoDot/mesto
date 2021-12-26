@@ -3,14 +3,14 @@
     "",
     "\\block",
     "\\block\\photo",
-    "\\block\\photo\\__delete",
-    "\\block\\photo\\__item",
-    "\\block\\photo\\__like",
-    "\\block\\photo\\__like\\_active",
+    "\\block\\photo\\__container",
+    "\\block\\photo\\__description",
+    "\\block\\photo\\__grid",
     "\\block\\photo\\__mesto",
-    "\\images",
-    "\\pages"
+    "\\block\\popup",
+    "\\block\\popup\\__close",
+    "\\script"
   ],
-  "SelectedNode": "\\block\\photo\\__item\\photo__item.css",
+  "SelectedNode": "\\block\\popup\\popup.css",
   "PreviewInSolutionExplorer": false
 }
