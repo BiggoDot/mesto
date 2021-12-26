@@ -37,58 +37,32 @@
     </section>
 
     <!-- PICTURES -->
+    <!--Section For Template-->
     <section class="photo">
       <ul class="photo__grid">
-        <li class="photo__item">
-          <img src="./images/castel.jpeg" alt="Замок" class="photo__mesto">
-          <div class="photo__container">
-            <h2 class="photo__description">Домбай</h2>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </li>
-        <li class="photo__item">
-          <img src="./images/mountain.jpeg" alt="Гора" class="photo__mesto">
-          <div class="photo__container">
-            <h2 class="photo__description">Карачаевск</h2>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </li>
-        <li class="photo__item">
-          <img src="./images/sunset.jpeg" alt="Закат" class="photo__mesto">
-          <div class="photo__container">
-            <h2 class="photo__description">Гора Эльбрус</h2>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </li>
-        <li class="photo__item">
-          <img src="./images/sunset.jpeg" alt="Закат" class="photo__mesto">
-          <div class="photo__container">
-            <h2 class="photo__description">Домбай</h2>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </li>
-        <li class="photo__item">
-          <img src="./images/castel.jpeg" alt="Замок" class="photo__mesto">
-          <div class="photo__container">
-            <h2 class="photo__description">Гора Эльбрус</h2>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </li>
-        <li class="photo__item">
-          <img src="./images/mountain.jpeg" alt="Гора" class="photo__mesto">
-          <div class="photo__container">
-            <h2 class="photo__description">Карачаево-Черкесия</h2>
-            <button type="button" class="photo__like"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
+
   <!-- FOOTER -->
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
+
+  <!--TEMPLATE-->
+  <template class="template__photo">
+    <li class="photo__item">
+      <button type="button" class="photo__delete"></button>
+      <img class="photo__mesto">
+      <div class="photo__container">
+        <h2 class="photo__description"></h2>
+        <button type="button" class="photo__like"></button>
+      </div>
+    </li>
+  </template>
+
   <!-- POPUP -->
+  <!--INFO EDIT-->
   <div class="popup">
     <div class="popup__container">
       <button type="button" class="popup__close"></button>
@@ -99,6 +73,28 @@
                class="popup__input" id="description" name="description">
         <button type="submit" class="popup__save">Сохранить</button>
       </form>
+    </div>
+  </div>
+
+  <!--ADDPHOTO-->
+  <div class="popup popup_for_photo">
+    <div class="popup__container">
+      <button type="button" class="popup__close popup__close_for_photo"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form popup__form_for_photo" name="profile-edit">
+        <input type="text" placeholder="Название" class="popup__input" id="place" name="photoplace">
+        <input type="text" placeholder="Ссылка на картинку"
+               class="popup__input" id="link" name="photolink">
+        <button type="submit" class="popup__save">Создать</button>
+      </form>
+    </div>
+  </div>
+  <!--PHOTO OPEN-->
+  <div class="popup popup_for_image">
+    <div class="popup__container popup__container_for_image">
+      <button type="button" class="popup__close popup__close_for_image"></button>
+      <img class="popup__image" />
+      <h2 class="popup__title popup__title_for_image">Новое место</h2>
     </div>
   </div>
 

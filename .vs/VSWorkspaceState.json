@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\block",
-    "\\block\\profile",
-    "\\block\\profile\\__container",
-    "\\block\\profile\\__description",
-    "\\block\\profile\\__edit",
-    "\\block\\profile\\__info",
-    "\\block\\profile\\__info-edit",
-    "\\block\\profile\\__name",
-    "\\block\\profile\\__photo-button"
+    "\\block\\photo",
+    "\\block\\photo\\__delete",
+    "\\block\\photo\\__item",
+    "\\block\\photo\\__like",
+    "\\block\\photo\\__like\\_active",
+    "\\block\\photo\\__mesto",
+    "\\images",
+    "\\pages"
   ],
-  "SelectedNode": "\\block\\profile\\profile.css",
+  "SelectedNode": "\\block\\photo\\__item\\photo__item.css",
   "PreviewInSolutionExplorer": false
 }
