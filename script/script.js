@@ -1,32 +1,47 @@
-const popup = document.querySelector('.popup');
-const popupCloseButton = popup.querySelector('.popup__close');
+const popupProfile = document.querySelector('.popup_for_profile');
+const popupCloseButton = popupProfile.querySelector('.popup__close_for_profile');
 const popupOpenButton = document.querySelector('.profile__edit');
-const form = document.querySelector('.popup__form');
+const formProfile = document.querySelector('.popup__form_for_profile');
 const name = document.getElementById('name');
 const description = document.getElementById('description');
 const profileDescription = document.querySelector('.profile__description');
 const profileName = document.querySelector('.profile__name');
+const gridContainer = document.querySelector('.photo__grid');
+const photoTemplate = document.querySelector('.template__photo').content;
+const photoList = photoTemplate.querySelector('.photo__item');
+const popupForImage = document.querySelector('.popup_for_image');
+const popupImage = document.querySelector('.popup__image');
+const popupText = document.querySelector('.popup__title_for_image');
+const popupForImageClose = document.querySelector('.popup__close_for_image');
+const popupPhoto = document.querySelector('.popup_for_photo');
+const addPhotoButton = document.querySelector('.profile__photo-button');
+const popupPohoCloseButton = document.querySelector('.popup__close_for_photo');
+const inputPhoto = document.getElementById('link');
+const inputPhotoName = document.getElementById('place');
+const popupFormPhoto = document.querySelector('.popup__form_for_photo');
 
-function popupOpen() {
-  name.value = profileName.textContent;
+function popupOpen(target) {
+  target.classList.add('popup_opened');
+};
+
+function popupClose(target) {
+  target.classList.remove('popup_opened');
+};
+function popupProfileOpen() {
+  name.value = profileName.textContent; 
   description.value = profileDescription.textContent;
-  popup.classList.add('popup_opened');
+  popupOpen(popupProfile);
 };
-
-function popupClose() {
-  popup.classList.remove('popup_opened');
-};
-
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = name.value;
   profileDescription.textContent = description.value;
-  popupClose();
+  popupClose(popupProfile);
 };
 
-popupCloseButton.addEventListener('click', popupClose);
-popupOpenButton.addEventListener('click', popupOpen);
-form.addEventListener('submit', formSubmitHandler);
+popupCloseButton.addEventListener('click', () => popupClose(popupProfile));
+popupOpenButton.addEventListener('click', popupProfileOpen);
+formProfile.addEventListener('submit', formSubmitHandler);
 
 //WORK 5
 
@@ -56,84 +71,72 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-const gridContainer = document.querySelector('.photo__grid');
-const photoTemplate = document.querySelector('.template__photo').content;
-const photoList = photoTemplate.querySelector('.photo__item');
-
-/*DELETE PHOTO*/
-function deletePhotoHandler(evt) {
-  evt.target.closest('.photo__item').remove();
-};
-/*LIKE PHOTO*/
-function toLike(evt) {
-  evt.target.classList.toggle('photo__like_active');
-}
-const popupForImage = document.querySelector('.popup_for_image');
-const popupImage = document.querySelector('.popup__image');
-const popupText = document.querySelector('.popup__title_for_image');
-const popupForImageClose = document.querySelector('.popup__close_for_image');
-
-
-/*WORK WITH ARRAY*/
-function recieveCard (item) {
+/*CREATING GRID FOR CARD AND EVENTS*/
+function addCard(name, link) {
   const photoGrid = photoTemplate.cloneNode(true);
   const mesto = photoGrid.querySelector('.photo__mesto');
   const photoDescription = photoGrid.querySelector('.photo__description');
   const likeButton = photoGrid.querySelector('.photo__like');
   const deleteButton = photoGrid.querySelector('.photo__delete');
-  
-  mesto.src = item.link;
-  mesto.alt = item.name;
-  photoDescription.textContent = item.name;
+
+  mesto.src = link;
+  mesto.alt = name;
+  photoDescription.textContent = name;
 
   deleteButton.addEventListener('click', deletePhotoHandler);
   likeButton.addEventListener('click', toLike);
-
-  mesto.addEventListener('click', function () {
-    popupForImage.classList.add('popup_opened');
-    popupImage.src = mesto.src;
-    popupImage.alt = mesto.alt;
-    popupText.textContent = photoDescription.textContent;
-  });
-
-  popupForImageClose.addEventListener('click', function () {
-    popupForImage.classList.remove('popup_opened');
-  });
-
-
-  gridContainer.prepend(photoGrid);
-
+  popupImageOpen(photoGrid);
+  return photoGrid;
 };
-initialCards.forEach(recieveCard);
-/*ADD PHOTOS*/
-const inputPhoto = document.getElementById('link');
-const inputPhotoName = document.getElementById('place');
-const popupFormPhoto = document.querySelector('.popup__form_for_photo');
+/*MAKING CARD*/
+function createCard(item) {
+  const newItem = addCard(item.name, item.link);
+  gridContainer.prepend(newItem);
+};
 
+/*RUNNING THROUGH ARRAY*/
+initialCards.forEach(item => {
+  createCard(item);
+});
+
+/*OPEN IMAGE*/
+function popupImageOpen(photoGrid) {
+  photoGrid.querySelector('.photo__mesto').addEventListener('click', () => {
+    popupOpen(popupForImage);
+    popupImage.src = document.querySelector('.photo__mesto').src;
+    popupImage.alt = document.querySelector('.photo__mesto').alt;
+    popupText.textContent = document.querySelector('.photo__description').textContent;
+  });
+};
+
+/*DELETE PHOTO*/
+function deletePhotoHandler(evt) {
+  evt.target.closest('.photo__item').remove();
+};
+
+/*LIKE PHOTO*/
+function toLike(evt) {
+  evt.target.classList.toggle('photo__like_active');
+}
+
+/*ADD PHOTOS*/
 function formAddPhotoHandler(evt) {
   evt.preventDefault();
-  recieveCard({
+  createCard({
     name: inputPhotoName.value,
     link: inputPhoto.value,
   });
   photoPopupClose();
   popupFormPhoto.reset();
 };
-popupFormPhoto.addEventListener('submit', formAddPhotoHandler);
-/*WORK WITH POPUP(OPEN AND CLOSE)*/
-const popupPhoto = document.querySelector('.popup_for_photo');
-const addPhotoButton = document.querySelector('.profile__photo-button');
-const popupPohotCloseButton = document.querySelector('.popup__close_for_photo');
 
-function photoPopupOpen() {
-  popupPhoto.classList.add('popup_opened');
-};
-
+/*CLOSE POPUP*/
 function photoPopupClose() {
-  popupPhoto.classList.remove('popup_opened');
   popupFormPhoto.reset();
+  popupClose(popupPhoto);
 };
 
-popupPohotCloseButton.addEventListener('click', photoPopupClose);
-addPhotoButton.addEventListener('click', photoPopupOpen);
+popupPohoCloseButton.addEventListener('click', photoPopupClose);
+addPhotoButton.addEventListener('click', () => popupOpen(popupPhoto));
+popupFormPhoto.addEventListener('submit', formAddPhotoHandler);
+popupForImageClose.addEventListener('click', () => popupClose(popupForImage));
