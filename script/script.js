@@ -72,7 +72,7 @@ const initialCards = [
   }
 ];
 /*CREATING LIST, CARD, ADD EVENTS*/
-function addCard(name, link) {
+function createCard(name, link) {
   const photoGrid = photoTemplate.cloneNode(true);
   const mesto = photoGrid.querySelector('.photo__mesto');
   const photoDescription = photoGrid.querySelector('.photo__description');
@@ -85,28 +85,27 @@ function addCard(name, link) {
 
   deleteButton.addEventListener('click', deletePhotoHandler);
   likeButton.addEventListener('click', toLike);
-  popupImageOpen(photoGrid);
+  mesto.addEventListener('click', popupImageOpen);
   return photoGrid;
 };
+
 /*INSERTS CARD*/
-function createCard(item) {
-  const newItem = addCard(item.name, item.link);
-  gridContainer.prepend(newItem);
+function addCard(item) {
+  gridContainer.prepend(item);
 };
 
 /*RUNNING THROUGH ARRAY*/
 initialCards.forEach(item => {
-  createCard(item);
+  const card = createCard(item.name, item.link);
+  addCard(card);
 });
 
 /*OPEN IMAGE*/
-function popupImageOpen(photoGrid) {
-  photoGrid.querySelector('.photo__mesto').addEventListener('click', () => {
-    popupOpen(popupForImage);
-    popupImage.src = document.querySelector('.photo__mesto').src;
-    popupImage.alt = document.querySelector('.photo__mesto').alt;
-    popupText.textContent = document.querySelector('.photo__description').textContent;
-  });
+function popupImageOpen(evt) {
+  popupImage.src = evt.target.src;
+  popupText.textContent = evt.target.alt;
+  popupImage.alt = evt.target.alt;
+  popupOpen(popupForImage);
 };
 
 /*DELETE PHOTO*/
@@ -122,10 +121,8 @@ function toLike(evt) {
 /*ADD PHOTOS*/
 function formAddPhotoHandler(evt) {
   evt.preventDefault();
-  createCard({
-    name: inputPhotoName.value,
-    link: inputPhoto.value,
-  });
+  const card = createCard(inputPhotoName.value, inputPhoto.value);
+  addCard(card);
   photoPopupClose();
   popupFormPhoto.reset();
 };
@@ -140,3 +137,6 @@ popupPohoCloseButton.addEventListener('click', photoPopupClose);
 addPhotoButton.addEventListener('click', () => popupOpen(popupPhoto));
 popupFormPhoto.addEventListener('submit', formAddPhotoHandler);
 popupForImageClose.addEventListener('click', () => popupClose(popupForImage));
+/*С наступающим новым годом, Владимир.
+  Желаю вам здоровья и что бы все ваши мечты сбывались!
+  Спасибо вам большое за то что, помогаете нам стать лучше!*/
