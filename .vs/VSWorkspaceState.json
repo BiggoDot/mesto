@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\block",
-    "\\block\\photo",
-    "\\block\\photo\\__container",
-    "\\block\\photo\\__description",
-    "\\block\\photo\\__grid",
-    "\\block\\photo\\__mesto",
     "\\block\\popup",
-    "\\block\\popup\\__close",
+    "\\block\\popup\\_opened",
+    "\\block\\popup\\__input",
+    "\\block\\popup\\__input-error",
+    "\\block\\popup\\__input\\_type_error",
+    "\\block\\popup\\__save",
+    "\\pages",
     "\\script"
   ],
+  "SelectedNode": "\\block\\popup\\__input\\_type_error\\popup__input_type_error.css",
   "PreviewInSolutionExplorer": false
 }

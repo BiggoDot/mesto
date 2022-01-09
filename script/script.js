@@ -2,8 +2,8 @@ const popupProfile = document.querySelector('.popup_for_profile');
 const popupCloseButton = popupProfile.querySelector('.popup__close_for_profile');
 const popupOpenButton = document.querySelector('.profile__edit');
 const formProfile = document.querySelector('.popup__form_for_profile');
-const name = document.getElementById('name');
-const description = document.getElementById('description');
+const name = document.querySelector('.popup__input_for_name');
+const description = document.querySelector('.popup__input_for_description');
 const profileDescription = document.querySelector('.profile__description');
 const profileName = document.querySelector('.profile__name');
 const gridContainer = document.querySelector('.photo__grid');
@@ -20,18 +20,43 @@ const inputPhoto = document.getElementById('link');
 const inputPhotoName = document.getElementById('place');
 const popupFormPhoto = document.querySelector('.popup__form_for_photo');
 
+/*NEW close on overlay*/
+function closeOnOverlay(evt) {
+  if (evt.target.classList.contains('popup')) {
+    popupClose(document.querySelector('.popup_opened'));
+  }
+}; 
+
+/*NEW close on esc*/
+function closeKeyHandler(evt) {
+  if (evt.key === 'Escape' || evt.keyCode == 27) {
+    const classForClosing = document.querySelector('.popup_opened');
+    popupClose(classForClosing);
+  }
+};
+
 function popupOpen(target) {
   target.classList.add('popup_opened');
+  document.addEventListener('keydown', closeKeyHandler);
+  document.addEventListener('click', closeOnOverlay);
 };
 
 function popupClose(target) {
   target.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeKeyHandler);
+  document.removeEventListener('click', closeOnOverlay);
 };
+
 function popupProfileOpen() {
   name.value = profileName.textContent; 
   description.value = profileDescription.textContent;
   popupOpen(popupProfile);
+  document.querySelector('.popup__save_for_profile').classList.add('button_inactive');
+  document.querySelector('.popup__save_for_profile').setAttribute('disabled', true);
+  hideInputError(formProfile, name);
+  hideInputError(formProfile, description);
 };
+
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = name.value;
@@ -45,32 +70,7 @@ formProfile.addEventListener('submit', formSubmitHandler);
 
 //WORK 5
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+
 /*CREATING LIST, CARD, ADD EVENTS*/
 function createCard(name, link) {
   const photoGrid = photoTemplate.cloneNode(true);
@@ -123,20 +123,20 @@ function formAddPhotoHandler(evt) {
   evt.preventDefault();
   const card = createCard(inputPhotoName.value, inputPhoto.value);
   addCard(card);
-  photoPopupClose();
-  popupFormPhoto.reset();
-};
-
-/*CLOSE POPUP*/
-function photoPopupClose() {
-  popupFormPhoto.reset();
   popupClose(popupPhoto);
+  popupFormPhoto.reset();
 };
 
-popupPohoCloseButton.addEventListener('click', photoPopupClose);
-addPhotoButton.addEventListener('click', () => popupOpen(popupPhoto));
+function photoPopupOpen() {
+  popupFormPhoto.reset();
+  popupOpen(popupPhoto);
+  document.querySelector('.popup__save_for_photo').classList.add('button_inactive');
+  document.querySelector('.popup__save_for_photo').setAttribute('disabled', true);
+  hideInputError(popupFormPhoto, inputPhotoName);
+  hideInputError(popupFormPhoto, inputPhoto);
+};
+
+popupPohoCloseButton.addEventListener('click', () => popupClose(popupPhoto));
+addPhotoButton.addEventListener('click', photoPopupOpen);
 popupFormPhoto.addEventListener('submit', formAddPhotoHandler);
 popupForImageClose.addEventListener('click', () => popupClose(popupForImage));
-/*С наступающим новым годом, Владимир.
-  Желаю вам здоровья и что бы все ваши мечты сбывались!
-  Спасибо вам большое за то что, помогаете нам стать лучше!*/
