@@ -19,11 +19,13 @@ const popupPohoCloseButton = document.querySelector('.popup__close_for_photo');
 const inputPhoto = document.getElementById('link');
 const inputPhotoName = document.getElementById('place');
 const popupFormPhoto = document.querySelector('.popup__form_for_photo');
+const buttonSaveProfile = document.querySelector('.popup__save_for_profile');
+const buttonSavePhoto = document.querySelector('.popup__save_for_photo');
 
 /*NEW close on overlay*/
 function closeOnOverlay(evt) {
   if (evt.target.classList.contains('popup')) {
-    popupClose(document.querySelector('.popup_opened'));
+    closePopup(document.querySelector('.popup_opened'));
   }
 }; 
 
@@ -31,42 +33,42 @@ function closeOnOverlay(evt) {
 function closeKeyHandler(evt) {
   if (evt.key === 'Escape' || evt.keyCode == 27) {
     const classForClosing = document.querySelector('.popup_opened');
-    popupClose(classForClosing);
+    closePopup(classForClosing);
   }
 };
 
-function popupOpen(target) {
+function openPopup(target) {
   target.classList.add('popup_opened');
   document.addEventListener('keydown', closeKeyHandler);
-  document.addEventListener('click', closeOnOverlay);
+  document.addEventListener('mousedown', closeOnOverlay);
 };
 
-function popupClose(target) {
+function closePopup(target) {
   target.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeKeyHandler);
-  document.removeEventListener('click', closeOnOverlay);
+  document.removeEventListener('mousedown', closeOnOverlay);
 };
 
-function popupProfileOpen() {
+function openPopupProfile() {
   name.value = profileName.textContent; 
   description.value = profileDescription.textContent;
-  popupOpen(popupProfile);
-  document.querySelector('.popup__save_for_profile').classList.add('button_inactive');
-  document.querySelector('.popup__save_for_profile').setAttribute('disabled', true);
-  hideInputError(formProfile, name);
-  hideInputError(formProfile, description);
+  openPopup(popupProfile);
+  buttonSaveProfile.classList.add('button_inactive');
+  buttonSaveProfile.setAttribute('disabled', true);
+  hideInputError(formProfile, name, config);
+  hideInputError(formProfile, description, config);
 };
 
-function formSubmitHandler(evt) {
+function submitProfileForm(evt) {
   evt.preventDefault();
   profileName.textContent = name.value;
   profileDescription.textContent = description.value;
-  popupClose(popupProfile);
+  closePopup(popupProfile);
 };
 
-popupCloseButton.addEventListener('click', () => popupClose(popupProfile));
-popupOpenButton.addEventListener('click', popupProfileOpen);
-formProfile.addEventListener('submit', formSubmitHandler);
+popupCloseButton.addEventListener('click', () => closePopup(popupProfile));
+popupOpenButton.addEventListener('click', openPopupProfile);
+formProfile.addEventListener('submit', submitProfileForm);
 
 //WORK 5
 
@@ -85,7 +87,7 @@ function createCard(name, link) {
 
   deleteButton.addEventListener('click', deletePhotoHandler);
   likeButton.addEventListener('click', toLike);
-  mesto.addEventListener('click', popupImageOpen);
+  mesto.addEventListener('click', openPopupImage);
   return photoGrid;
 };
 
@@ -101,11 +103,11 @@ initialCards.forEach(item => {
 });
 
 /*OPEN IMAGE*/
-function popupImageOpen(evt) {
+function openPopupImage(evt) {
   popupImage.src = evt.target.src;
   popupText.textContent = evt.target.alt;
   popupImage.alt = evt.target.alt;
-  popupOpen(popupForImage);
+  openPopup(popupForImage);
 };
 
 /*DELETE PHOTO*/
@@ -119,24 +121,24 @@ function toLike(evt) {
 }
 
 /*ADD PHOTOS*/
-function formAddPhotoHandler(evt) {
+function addPhotoHandler(evt) {
   evt.preventDefault();
   const card = createCard(inputPhotoName.value, inputPhoto.value);
   addCard(card);
-  popupClose(popupPhoto);
+  closePopup(popupPhoto);
   popupFormPhoto.reset();
 };
 
-function photoPopupOpen() {
+function openPhotoPopup() {
   popupFormPhoto.reset();
-  popupOpen(popupPhoto);
-  document.querySelector('.popup__save_for_photo').classList.add('button_inactive');
-  document.querySelector('.popup__save_for_photo').setAttribute('disabled', true);
-  hideInputError(popupFormPhoto, inputPhotoName);
-  hideInputError(popupFormPhoto, inputPhoto);
+  openPopup(popupPhoto);
+  buttonSavePhoto.classList.add('button_inactive');
+  buttonSavePhoto.setAttribute('disabled', true);
+  hideInputError(popupFormPhoto, inputPhotoName, config);
+  hideInputError(popupFormPhoto, inputPhoto, config);
 };
 
-popupPohoCloseButton.addEventListener('click', () => popupClose(popupPhoto));
-addPhotoButton.addEventListener('click', photoPopupOpen);
-popupFormPhoto.addEventListener('submit', formAddPhotoHandler);
-popupForImageClose.addEventListener('click', () => popupClose(popupForImage));
+popupPohoCloseButton.addEventListener('click', () => closePopup(popupPhoto));
+addPhotoButton.addEventListener('click', openPhotoPopup);
+popupFormPhoto.addEventListener('submit', addPhotoHandler);
+popupForImageClose.addEventListener('click', () => closePopup(popupForImage));
