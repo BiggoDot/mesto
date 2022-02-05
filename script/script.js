@@ -1,3 +1,16 @@
+import {initialCards} from './array.js';
+import {Card} from './card.js';
+import {Validate} from './validate.js';
+
+const config = {
+  formElement: '.popup__form',
+  inputElement: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active',
+};
+
 const popupProfile = document.querySelector('.popup_for_profile');
 const popupCloseButton = popupProfile.querySelector('.popup__close_for_profile');
 const popupOpenButton = document.querySelector('.profile__edit');
@@ -7,11 +20,9 @@ const description = document.querySelector('.popup__input_for_description');
 const profileDescription = document.querySelector('.profile__description');
 const profileName = document.querySelector('.profile__name');
 const gridContainer = document.querySelector('.photo__grid');
-const photoTemplate = document.querySelector('.template__photo').content;
-const photoList = photoTemplate.querySelector('.photo__item');
-const popupForImage = document.querySelector('.popup_for_image');
-const popupImage = document.querySelector('.popup__image');
-const popupText = document.querySelector('.popup__title_for_image');
+export const popupForImage = document.querySelector('.popup_for_image');
+export const popupImage = document.querySelector('.popup__image');
+export const popupText = document.querySelector('.popup__title_for_image');
 const popupForImageClose = document.querySelector('.popup__close_for_image');
 const popupPhoto = document.querySelector('.popup_for_photo');
 const addPhotoButton = document.querySelector('.profile__photo-button');
@@ -22,14 +33,14 @@ const popupFormPhoto = document.querySelector('.popup__form_for_photo');
 const buttonSaveProfile = document.querySelector('.popup__save_for_profile');
 const buttonSavePhoto = document.querySelector('.popup__save_for_photo');
 
-/*NEW close on overlay*/
+/*close on overlay*/
 function closeOnOverlay(evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup(document.querySelector('.popup_opened'));
   }
 }; 
 
-/*NEW close on esc*/
+/*close on esc*/
 function closeKeyHandler(evt) {
   if (evt.key === 'Escape' || evt.keyCode == 27) {
     const classForClosing = document.querySelector('.popup_opened');
@@ -37,7 +48,7 @@ function closeKeyHandler(evt) {
   }
 };
 
-function openPopup(target) {
+export function openPopup(target) {
   target.classList.add('popup_opened');
   document.addEventListener('keydown', closeKeyHandler);
   document.addEventListener('mousedown', closeOnOverlay);
@@ -55,8 +66,9 @@ function openPopupProfile() {
   openPopup(popupProfile);
   buttonSaveProfile.classList.add('button_inactive');
   buttonSaveProfile.setAttribute('disabled', true);
-  hideInputError(formProfile, name, config);
-  hideInputError(formProfile, description, config);
+  const inputs = formProfile.querySelectorAll('.popup__input');
+  const editFormValidator = new Validate(formProfile, config);
+  editFormValidator.removeError(inputs);
 };
 
 function submitProfileForm(evt) {
@@ -70,72 +82,43 @@ popupCloseButton.addEventListener('click', () => closePopup(popupProfile));
 popupOpenButton.addEventListener('click', openPopupProfile);
 formProfile.addEventListener('submit', submitProfileForm);
 
-//WORK 5
-
-
-/*CREATING LIST, CARD, ADD EVENTS*/
-function createCard(name, link) {
-  const photoGrid = photoTemplate.cloneNode(true);
-  const mesto = photoGrid.querySelector('.photo__mesto');
-  const photoDescription = photoGrid.querySelector('.photo__description');
-  const likeButton = photoGrid.querySelector('.photo__like');
-  const deleteButton = photoGrid.querySelector('.photo__delete');
-
-  mesto.src = link;
-  mesto.alt = name;
-  photoDescription.textContent = name;
-
-  deleteButton.addEventListener('click', deletePhotoHandler);
-  likeButton.addEventListener('click', toLike);
-  mesto.addEventListener('click', openPopupImage);
-  return photoGrid;
-};
-
 /*INSERTS CARD*/
 function addCard(item) {
   gridContainer.prepend(item);
 };
 
 /*RUNNING THROUGH ARRAY*/
-initialCards.forEach(item => {
-  const card = createCard(item.name, item.link);
-  addCard(card);
+initialCards.forEach((item) => {
+  const card = new Card(item.name, item.link, '.template__photo');
+  const cardElement = card.createCard();
+  addCard(cardElement);
 });
 
-/*OPEN IMAGE*/
-function openPopupImage(evt) {
-  popupImage.src = evt.target.src;
-  popupText.textContent = evt.target.alt;
-  popupImage.alt = evt.target.alt;
-  openPopup(popupForImage);
-};
+// START VALIDATION
+const editFormValidator = new Validate(formProfile, config)
+editFormValidator.enableValidation();
 
-/*DELETE PHOTO*/
-function deletePhotoHandler(evt) {
-  evt.target.closest('.photo__item').remove();
-};
-
-/*LIKE PHOTO*/
-function toLike(evt) {
-  evt.target.classList.toggle('photo__like_active');
-}
+const addCardFormValidator = new Validate(popupFormPhoto, config)
+addCardFormValidator.enableValidation();
 
 /*ADD PHOTOS*/
 function addPhotoHandler(evt) {
   evt.preventDefault();
-  const card = createCard(inputPhotoName.value, inputPhoto.value);
-  addCard(card);
+  const card = new Card (inputPhotoName.value, inputPhoto.value, '.template__photo');
+  const cardElement = card.createCard();
+  addCard(cardElement);
   closePopup(popupPhoto);
   popupFormPhoto.reset();
 };
-
-function openPhotoPopup() {
+// OPEN POPUP THAT ADDS PHOTOS
+export function openPhotoPopup() {
   popupFormPhoto.reset();
   openPopup(popupPhoto);
   buttonSavePhoto.classList.add('button_inactive');
   buttonSavePhoto.setAttribute('disabled', true);
-  hideInputError(popupFormPhoto, inputPhotoName, config);
-  hideInputError(popupFormPhoto, inputPhoto, config);
+  const inputs = popupFormPhoto.querySelectorAll('.popup__input');
+  const editFormValidator = new Validate(popupFormPhoto, config);
+  editFormValidator.removeError(inputs);
 };
 
 popupPohoCloseButton.addEventListener('click', () => closePopup(popupPhoto));
