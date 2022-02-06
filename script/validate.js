@@ -1,4 +1,3 @@
-import {popupFormPhoto} from './script.js'
 export class Validate {
   constructor(form, config){
     this._form = form;
@@ -67,7 +66,7 @@ export class Validate {
     })
   };
 
-   removeError () {
+   removeError() {
     this._inputList.forEach(item => {
         this._hideInputError(item)
      })
@@ -80,6 +79,4 @@ export class Validate {
       this._setEventListeners();
     };  
 }
-
-// popupFormPhoto.disableSubmitButton();
   

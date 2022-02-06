@@ -25,6 +25,7 @@
       
      return this._element;
     }
+    
     _deletePhotoHandler() {
         this._element.querySelector('.photo__delete').closest('.photo__item').remove();
       };

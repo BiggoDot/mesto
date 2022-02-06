@@ -29,9 +29,14 @@ const addPhotoButton = document.querySelector('.profile__photo-button');
 const popupPohoCloseButton = document.querySelector('.popup__close_for_photo');
 const inputPhoto = document.getElementById('link');
 const inputPhotoName = document.getElementById('place');
-export const popupFormPhoto = document.querySelector('.popup__form_for_photo');
-const buttonSaveProfile = document.querySelector('.popup__save_for_profile');
-const buttonSavePhoto = document.querySelector('.popup__save_for_photo');
+const popupFormPhoto = document.querySelector('.popup__form_for_photo');
+
+// START VALIDATION
+const editFormValidator = new Validate(formProfile, config)
+editFormValidator.enableValidation();
+
+const addCardFormValidator = new Validate(popupFormPhoto, config)
+addCardFormValidator.enableValidation();
 
 /*close on overlay*/
 function closeOnOverlay(evt) {
@@ -64,11 +69,8 @@ function openPopupProfile() {
   name.value = profileName.textContent; 
   description.value = profileDescription.textContent;
   openPopup(popupProfile);
-  buttonSaveProfile.classList.add('button_inactive');
-  buttonSaveProfile.setAttribute('disabled', true);
-  const inputs = formProfile.querySelectorAll('.popup__input');
-  const editFormValidator = new Validate(formProfile, config);
   editFormValidator.removeError();
+  editFormValidator.disableSubmitButton();
 };
 
 function submitProfileForm(evt) {
@@ -98,13 +100,6 @@ initialCards.forEach((item) => {
   makeCard(item);
 });
 
-// START VALIDATION
-const editFormValidator = new Validate(formProfile, config)
-editFormValidator.enableValidation();
-
-const addCardFormValidator = new Validate(popupFormPhoto, config)
-addCardFormValidator.enableValidation();
-
 /*ADD PHOTOS*/
 function addPhotoHandler(evt) {
   evt.preventDefault();
@@ -114,22 +109,16 @@ function addPhotoHandler(evt) {
 };
 
 // OPEN POPUP THAT ADDS PHOTOS
-export function openPhotoPopup() {
+ function openPhotoPopup() {
   popupFormPhoto.reset();
   openPopup(popupPhoto);
-  // popupFormPhoto.disableSubmitButton();
-// new Validate(popupPhoto, config).removeError();
-  // buttonSavePhoto.classList.add('button_inactive');
-  // buttonSavePhoto.setAttribute('disabled', true);
-  // this.disableSubmitButton();
-  // const inputs = popupFormPhoto.querySelectorAll('.popup__input');
-//   const editFormValidator = new Validate();
-//   editFormValidator.removeError();
-//  editFormValidator.disableSubmitButton();
-  
+  addCardFormValidator.removeError();
+  addCardFormValidator.disableSubmitButton();
 };
 
 popupPohoCloseButton.addEventListener('click', () => closePopup(popupPhoto));
 addPhotoButton.addEventListener('click', openPhotoPopup);
 popupFormPhoto.addEventListener('submit', addPhotoHandler);
 popupForImageClose.addEventListener('click', () => closePopup(popupForImage));
+
+// Спасибо за проверку! Хорошего вам дня!
