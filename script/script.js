@@ -1,6 +1,6 @@
 import {initialCards} from './array.js';
-import {Card} from './card.js';
-import {Validate} from './validate.js';
+import {Card} from './Card.js';
+import {Validate} from './Validate.js';
 
 const config = {
   formElement: '.popup__form',
@@ -29,7 +29,7 @@ const addPhotoButton = document.querySelector('.profile__photo-button');
 const popupPohoCloseButton = document.querySelector('.popup__close_for_photo');
 const inputPhoto = document.getElementById('link');
 const inputPhotoName = document.getElementById('place');
-const popupFormPhoto = document.querySelector('.popup__form_for_photo');
+export const popupFormPhoto = document.querySelector('.popup__form_for_photo');
 const buttonSaveProfile = document.querySelector('.popup__save_for_profile');
 const buttonSavePhoto = document.querySelector('.popup__save_for_photo');
 
@@ -68,7 +68,7 @@ function openPopupProfile() {
   buttonSaveProfile.setAttribute('disabled', true);
   const inputs = formProfile.querySelectorAll('.popup__input');
   const editFormValidator = new Validate(formProfile, config);
-  editFormValidator.removeError(inputs);
+  editFormValidator.removeError();
 };
 
 function submitProfileForm(evt) {
@@ -87,11 +87,15 @@ function addCard(item) {
   gridContainer.prepend(item);
 };
 
-/*RUNNING THROUGH ARRAY*/
-initialCards.forEach((item) => {
+function makeCard (item) {
   const card = new Card(item.name, item.link, '.template__photo');
   const cardElement = card.createCard();
   addCard(cardElement);
+};
+
+/*RUNNING THROUGH ARRAY*/
+initialCards.forEach((item) => {
+  makeCard(item);
 });
 
 // START VALIDATION
@@ -104,21 +108,25 @@ addCardFormValidator.enableValidation();
 /*ADD PHOTOS*/
 function addPhotoHandler(evt) {
   evt.preventDefault();
-  const card = new Card (inputPhotoName.value, inputPhoto.value, '.template__photo');
-  const cardElement = card.createCard();
-  addCard(cardElement);
+  makeCard(({name:inputPhotoName.value, link:inputPhoto.value}));
   closePopup(popupPhoto);
   popupFormPhoto.reset();
 };
+
 // OPEN POPUP THAT ADDS PHOTOS
 export function openPhotoPopup() {
   popupFormPhoto.reset();
   openPopup(popupPhoto);
-  buttonSavePhoto.classList.add('button_inactive');
-  buttonSavePhoto.setAttribute('disabled', true);
-  const inputs = popupFormPhoto.querySelectorAll('.popup__input');
-  const editFormValidator = new Validate(popupFormPhoto, config);
-  editFormValidator.removeError(inputs);
+  // popupFormPhoto.disableSubmitButton();
+// new Validate(popupPhoto, config).removeError();
+  // buttonSavePhoto.classList.add('button_inactive');
+  // buttonSavePhoto.setAttribute('disabled', true);
+  // this.disableSubmitButton();
+  // const inputs = popupFormPhoto.querySelectorAll('.popup__input');
+//   const editFormValidator = new Validate();
+//   editFormValidator.removeError();
+//  editFormValidator.disableSubmitButton();
+  
 };
 
 popupPohoCloseButton.addEventListener('click', () => closePopup(popupPhoto));

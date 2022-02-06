@@ -1,7 +1,7 @@
+import {popupFormPhoto} from './script.js'
 export class Validate {
   constructor(form, config){
     this._form = form;
-    this._formElement = config.formElement;
     this._inputElement = config.inputElement;
     this._submitButtonSelector = config.submitButtonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
@@ -39,14 +39,22 @@ export class Validate {
       return !inputElement.validity.valid;
     });
   };
-  
+
+  disableSubmitButton(){
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.setAttribute('disabled', true);
+  }
+
+  _enableSubmitButton(){
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.removeAttribute('disabled');
+  }
+
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.setAttribute('disabled', true);
+      this.disableSubmitButton();
     } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
-      this._buttonElement.removeAttribute('disabled');
+      this._enableSubmitButton()
     }
   };
 
@@ -59,8 +67,8 @@ export class Validate {
     })
   };
 
-   removeError (inputElement) {
-        inputElement.forEach(item => {
+   removeError () {
+    this._inputList.forEach(item => {
         this._hideInputError(item)
      })
     }
@@ -72,4 +80,6 @@ export class Validate {
       this._setEventListeners();
     };  
 }
+
+// popupFormPhoto.disableSubmitButton();
   

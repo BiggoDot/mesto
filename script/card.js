@@ -1,14 +1,14 @@
   import {popupForImage, openPopup, popupImage,  popupText} from './script.js'
   export class Card {
-    constructor(name, link, cardTemplate) {
+    constructor(name, link, templateSelector) {
       this._name = name;
       this._link = link;
-      this._cardTemplate = cardTemplate;
+      this._templateSelector = templateSelector;
     }
 
     _getTemplate() {
       const photoTemplate = document
-      .querySelector(this._cardTemplate)
+      .querySelector(this._templateSelector)
       .content
       .querySelector('.photo__item')
       .cloneNode(true);
@@ -49,15 +49,5 @@
     }
     
     }
-
-     //  _addCard(data) {
-    //     document.querySelector('.photo__grid').prepend(data);
-    // }
-    // const mesto = this._element.querySelector('.photo__mesto');
-     // const likeButton = this._element.querySelector('.photo__like');
-      // const deleteButton = this._element.querySelector('.photo__delete');
-      // deleteButton.addEventListener('click', deletePhotoHandler);
-      // likeButton.addEventListener('click', toLike);
-      // mesto.addEventListener('click', openPopupImage);
 
     
