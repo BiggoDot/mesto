@@ -34,20 +34,10 @@
        this._element.querySelector('.photo__like').classList.toggle('photo__like_active');
      }
 
-    //  _openPopupImage() {
-    //   popupImage.src = this._link;
-    //   popupText.textContent = this._name;
-    //   popupImage.alt = this._name;
-    //   openPopup(popupForImage);
-    // };
-
-     _setEventListeners() {
-        
+     _setEventListeners() {        
       this._element.querySelector('.photo__delete').addEventListener('click', () => {this._deletePhotoHandler()});
       this._element.querySelector('.photo__like').addEventListener('click', () => {this._toLike()}); 
-      this._element.querySelector('.photo__mesto').addEventListener('click', this._handleCardClick);
-      
-      // this._element.querySelector('.photo__mesto').addEventListener('click', () => {this._openPopupImage()});   
+      this._element.querySelector('.photo__mesto').addEventListener('click', this._handleCardClick);  
     }
     
     }
