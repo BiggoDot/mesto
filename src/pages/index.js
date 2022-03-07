@@ -1,41 +1,21 @@
 import './index.css';
-import {initialCards} from '../script/array.js';
-import {Card} from '../script/Card.js';
-import {Validate} from '../script/Validate.js';
-import {Section} from '../script//Section.js'
-import { Popup } from '../script//Popup.js';
-import {PopupWithImage} from '../script//PopupWithImage.js'
-import {PopupWithForm} from '../script//PopupWithForm.js'
-import {UserInfo} from '../script//UserInfo.js';
+import {Card} from '../components/Card.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {Section} from '../components/Section.js'
+import { Popup } from '../components/Popup.js';
+import {PopupWithImage} from '../components/PopupWithImage.js'
+import {PopupWithForm} from '../components/PopupWithForm.js'
+import {UserInfo} from '../components/UserInfo.js';
+import {config, popupProf,  
+  popupOpenButton, formProfile, name, description, profileDescription,
+  profileName, gridContainer, popupForImage, popupPhoto, 
+  addPhotoButton, popupFormPhoto, initialCards
+} from '../utils/constants.js';
 
-const config = {
-  formElement: '.popup__form',
-  inputElement: '.popup__input',
-  submitButtonSelector: '.popup__save',
-  inactiveButtonClass: 'button_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active',
-};
-const popupProf = '.popup_for_profile';
-const popupProfile = document.querySelector('.popup_for_profile');
-export const popupCloseButton = popupProfile.querySelector('.popup__close_for_profile');
-export const popupOpenButton = document.querySelector('.profile__edit');
-const formProfile = document.querySelector('.popup__form_for_profile');
-const name = document.querySelector('.popup__input_for_name');
-const description = document.querySelector('.popup__input_for_description');
-const profileDescription = '.profile__description';
-const profileName = '.profile__name';
-const gridContainer = '.photo__grid';
-const popupForImage = '.popup_for_image';
-const popupPhoto = '.popup_for_photo';
-const addPhotoButton = document.querySelector('.profile__photo-button');
-const inputPhoto = document.getElementById('link');
-const inputPhotoName = document.getElementById('place');
-const popupFormPhoto = document.querySelector('.popup__form_for_photo');
 const user = new UserInfo (profileName, profileDescription);
 const imagePopup = new PopupWithImage(popupForImage);
-const editFormValidator = new Validate(formProfile, config);
-const addCardFormValidator = new Validate(popupFormPhoto, config);
+const editFormValidator = new FormValidator(formProfile, config);
+const addCardFormValidator = new FormValidator(popupFormPhoto, config);
 
 // START VALIDATION
 editFormValidator.enableValidation();
@@ -46,11 +26,16 @@ function addCard(item) {
   photoGrid.addItem(item); 
 };
 
-function makeCard (item) {
+function createCard(item) {
   const card = new Card(item.name, item.link, '.template__photo', 
-    {handleCardClick: () => imagePopup.openImage(item.name, item.link)});
-    const cardElement = card.createCard();
-    addCard(cardElement);
+  {handleCardClick: () => imagePopup.openImage(item.name, item.link)});
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
+function makeCard (item) {
+  const cardElement =  createCard(item);
+  addCard(cardElement);
 };
 
 // CREATE SECTION
@@ -77,8 +62,8 @@ popupOpenButton.addEventListener('click', () => {profile.open();
 profile.setEventListeners();
 
 // EVERYTHIG FOR IMAGE POPUP
-const imageAdd = new PopupWithForm(popupPhoto, {callBack: ()  => {
-  makeCard({name:inputPhotoName.value, link:inputPhoto.value});
+const imageAdd = new PopupWithForm(popupPhoto, {callBack: (item)  => {
+    makeCard({name: item.photoplace, link: item.photolink}); 
     imageAdd.close();
 }});
 
@@ -87,5 +72,6 @@ addPhotoButton.addEventListener('click', ()=> {imageAdd.open();
   addCardFormValidator.disableSubmitButton();})
 
 imageAdd.setEventListeners();
+imagePopup.setEventListeners();
 
 // Спасибо за проверку! Хорошего вам дня!
