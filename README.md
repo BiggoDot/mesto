@@ -13,5 +13,5 @@
 * Neasted БЭМ
 
 ## Доступ к проекту
-https://biggodot.github.io/mesto/index.html
+https://biggodot.github.io/mesto
 
