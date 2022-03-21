@@ -30,7 +30,6 @@ export class Card {
 
   setLikes(newLikes) {
     this._like = newLikes;
-    this._likeCount = this._element.querySelector('.photo__like-count');
     this._likeCount.textContent = this._like.length;
 
     if (this.isLiked()) {
@@ -47,6 +46,7 @@ export class Card {
     this._description = this._element.querySelector('.photo__description');
     this._likeButton = this._element.querySelector('.photo__like');
     this._deleteButton = this._element.querySelector('.photo__delete');
+    this._likeCount = this._element.querySelector('.photo__like-count');
     this._img.src = this._link;
     this._img.alt = this._name;
     this._description.textContent = this._name;

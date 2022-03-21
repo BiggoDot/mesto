@@ -3,7 +3,8 @@ export class PopupWithForm extends Popup {
     constructor(popupSelector, { callBack }) {
         super(popupSelector)
         this._form = this._popup.querySelector('.popup__form');
-        this._loadingButton = this._popup.querySelector('.popup__save')
+        this._loadingButton = this._popup.querySelector('.popup__save');
+        this._buttonText = this._loadingButton.textContent;
         this._inputs = Array.from(this._popup.querySelectorAll('.popup__input'));
         this._callBack = callBack;
     }
@@ -33,15 +34,12 @@ export class PopupWithForm extends Popup {
         this._form.reset();
     }
 
-    renderLoading(isLoading, isSave){
+    renderLoading(isLoading){
         if(isLoading){
             this._loadingButton.textContent = 'Сохранение...';
         }
-        else if(isSave){
-            this._loadingButton.textContent = 'Сохранить';
+        else {
+            this._loadingButton.textContent = this._buttonText;
         }
-        else{
-            this._loadingButton.textContent = 'Создать';
-        }   
     }
 }

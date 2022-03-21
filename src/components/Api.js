@@ -4,33 +4,26 @@ class Api {
         this._headers = headers;
     }
 
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json()
+        }
+        else {
+            return Promise.reject(res.status)
+        }
+    }
+
     getProfile() {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                else {
-                    return Promise.reject(res.status)
-                }
-            })
-            .catch(console.log)
+            .then(this._checkResponse)
     }
     getInitialCards() {
         return fetch(`${this._url}/cards`, {
             headers: this._headers
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                else {
-                    return Promise.reject(res.status)
-                }
-            })
-            .catch(console.log)
+            .then(this._checkResponse)
     }
 
     editProfile(name, about) {
@@ -42,15 +35,7 @@ class Api {
                 about
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                else {
-                    return Promise.reject(res.status)
-                }
-            })
-            .catch(console.log)
+            .then(this._checkResponse)
     }
 
     newCard(name, link) {
@@ -62,15 +47,7 @@ class Api {
                 link
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                else {
-                    return Promise.reject(res.status)
-                }
-            })
-            .catch(console.log)
+            .then(this._checkResponse)
     }
 
     deleteCard(id) {
@@ -78,15 +55,7 @@ class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                else {
-                    return Promise.reject(res.status)
-                }
-            })
-            .catch(console.log)
+            .then(this._checkResponse)
     }
 
     deleteLike(id) {
@@ -94,15 +63,7 @@ class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                else {
-                    return Promise.reject(res.status)
-                }
-            })
-            .catch(console.log)
+            .then(this._checkResponse)
     }
 
     putLike(id) {
@@ -110,15 +71,7 @@ class Api {
             method: 'PUT',
             headers: this._headers
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                else {
-                    return Promise.reject(res.status)
-                }
-            })
-            .catch(console.log)
+            .then(this._checkResponse)
     }
 
     setAvatar(avatar) {
@@ -129,15 +82,7 @@ class Api {
                 avatar
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                else {
-                    return Promise.reject(res.status)
-                }
-            })
-            .catch(console.log)
+            .then(this._checkResponse)
     }
 
 }

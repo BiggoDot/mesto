@@ -7,18 +7,18 @@ import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {UserInfo} from '../components/UserInfo.js';
 import {api} from '../components/Api.js'
-import {config, popupProf,  
-  popupOpenButton, formProfile, name, description, profileDescription,
-  profileName, gridContainer, popupForImage, popupPhoto, 
-  addPhotoButton, popupFormPhoto, avatarButton
+import {config, popupProfile,  
+  profileOpenButton, formProfile, inputForName, inputForDescription, profileDescription,
+  profileName, gridContainer, popupForImage, popupAddPhoto, 
+  addPhotoButton, popupFormAddPhoto, avatarButton, avatarPopup
 } from '../utils/constants.js';
 
-const ava = document.querySelector('.popup__form_for_avatar')
+
 const user = new UserInfo (profileName, profileDescription, '.profile__avatar');
 const imagePopup = new PopupWithImage(popupForImage);
 const editFormValidator = new FormValidator(formProfile, config);
-const addCardFormValidator = new FormValidator(popupFormPhoto, config);
-const avatarValidator = new FormValidator(ava, config);
+const addCardFormValidator = new FormValidator(popupFormAddPhoto, config);
+const avatarValidator = new FormValidator(avatarPopup, config);
 let userId;
 
 // PROMISES
@@ -27,11 +27,10 @@ Promise.all([api.getInitialCards(), api.getProfile()])
    userId = userData._id;
    user.setUserInfo(userData.name, userData.about);
    user.setUserAvatar(userData.avatar);
-   cards.forEach(card =>{
-    const cardItem = createCard({name: card.name, link: card.link, likes: card.likes, _id: card._id,
-    userId: userId, ownerId: card.owner._id});
-    photoGrid.addItemAppend(cardItem);})
+   cards.reverse()
+   photoGrid.renderItems(cards);
   })
+  .catch((err) =>{console.log(`Ошибка: ${err}`)})
 
 // START VALIDATION
 editFormValidator.enableValidation();
@@ -55,6 +54,7 @@ function createCard(item) {
         card.deletePhotoHandler();
         deleteConfirm.close();
       })
+      .catch((err) =>{console.log(`Ошибка: ${err}`)})
     }
   })
   },
@@ -63,13 +63,15 @@ function createCard(item) {
       api.deleteLike(id)
     .then(res => {
       card.setLikes(res.likes)
-    })    
+    })
+    .catch((err) =>{console.log(`Ошибка: ${err}`)})    
     }
     else {
       api.putLike(id)
     .then(res => {
       card.setLikes(res.likes)
     })
+    .catch((err) =>{console.log(`Ошибка: ${err}`)})
     }    
   }
   });
@@ -83,26 +85,28 @@ function makeCard (item) {
 };
 
 // CREATE SECTION
-const photoGrid = new Section({items: [], 
-  renderer:(item) =>{ makeCard (item)
+const photoGrid = new Section({ 
+  renderer:(item) =>{  makeCard ({name: item.name, link: item.link, likes: item.likes, _id: item._id,
+    userId: userId, ownerId: item.owner._id})
   }}, gridContainer);
-
+  
+  
 // EVERYTHING FOR PROFILE POPUP 
-const profile = new PopupWithForm(popupProf, {callBack: (info)  => {  
-  profile.renderLoading(true, true)
+const profile = new PopupWithForm(popupProfile, {callBack: (info)  => {  
+  profile.renderLoading(true)
   api.editProfile(info.name, info.description)  
   .then(res => {
     user.setUserInfo(res.name, res.about);
     profile.close();
   }) 
   .catch((err) =>{console.log(`Ошибка: ${err}`)})
-  .finally(() =>{profile.renderLoading(false, true)})
+  .finally(() =>{profile.renderLoading(false)})
 }});
 
-popupOpenButton.addEventListener('click', () => {profile.open();
+profileOpenButton.addEventListener('click', () => {profile.open();
   const userData = user.getUserInfo()
-  name.value = userData.name;
-  description.value = userData.description; 
+  inputForName.value = userData.name;
+  inputForDescription.value = userData.description; 
   editFormValidator.removeError();
   editFormValidator.disableSubmitButton();
 })
@@ -110,23 +114,23 @@ popupOpenButton.addEventListener('click', () => {profile.open();
 profile.setEventListeners();
 
 // EVERYTHIG FOR IMAGE POPUP
-const imageAdd = new PopupWithForm(popupPhoto, {callBack: (item)  => {
-    imageAdd.renderLoading(true, false)
+const photoAdd = new PopupWithForm(popupAddPhoto, {callBack: (item)  => {
+    photoAdd.renderLoading(true)
     api.newCard(item.photoplace, item.photolink)
     .then(res => {
       makeCard({name: res.name, link: res.link, likes: res.likes, _id: res._id, 
         userId: res._id, ownerId: res.owner._id});
-      imageAdd.close();
+      photoAdd.close();
     }) 
     .catch((err) =>{console.log(`Ошибка: ${err}`)})
-    .finally(() =>{imageAdd.renderLoading(false, false)})
+    .finally(() =>{photoAdd.renderLoading(false)})
 }});
 
-addPhotoButton.addEventListener('click', () => {imageAdd.open();
+addPhotoButton.addEventListener('click', () => {photoAdd.open();
   addCardFormValidator.removeError();
   addCardFormValidator.disableSubmitButton();})
 
-imageAdd.setEventListeners();
+photoAdd.setEventListeners();
 
 // EVERYTHING FOR DELETING IMAGE
 const deleteConfirm = new PopupWithForm('.popup_for_delete', {});
@@ -135,14 +139,14 @@ deleteConfirm.setEventListeners();
 
 // EVERYTHING FOR CHANGING AVATAR
 const avatarChange = new PopupWithForm('.popup_for_avatar', {callBack: (info)  => {  
-  avatarChange.renderLoading(true, true);
+  avatarChange.renderLoading(true);
   api.setAvatar(info.avatar)  
   .then(res => {
      user.setUserAvatar(res.avatar);
      avatarChange.close();
   }) 
   .catch((err) =>{console.log(`Ошибка: ${err}`)})
-  .finally(() =>{avatarChange.renderLoading(false, true)})
+  .finally(() =>{avatarChange.renderLoading(false)})
 }});
 
 avatarButton.addEventListener('click', () => {avatarChange.open();
