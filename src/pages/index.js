@@ -156,6 +156,3 @@ avatarButton.addEventListener('click', () => {avatarChange.open();
 avatarChange.setEventListeners();
 // EVENTLISTENER FOR POPUP WITH IMAGE
 imagePopup.setEventListeners();
-
-
-// Спасибо за проверку! Хорошего вам дня!
