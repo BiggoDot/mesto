@@ -14,19 +14,22 @@ It is an Instagram like single page website. Here a user is able to edit thier p
 ## Isntallation instructions
 
 1. Clone repository using command 
----
+
+```
 git clone git@github.com:BiggoDot/mesto.git
----
+```
 
 2. Download missing development dependencies by running 
----
+
+```
 npm install
----
+```
 
 3. To start the server 
----
+
+```
 npm run dev
----
+```
 
 ## Link to the project
 https://biggodot.github.io/mesto
